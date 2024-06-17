@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionString": {
+    "Default": "Data Source=DESKTOP-NM4JG25\\TEST;Initial Catalog=TaskManagement;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"
+  }
+}
