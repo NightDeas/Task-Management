@@ -16,9 +16,9 @@
     <Grid>
         <StackPanel Margin="10" Orientation="Vertical" VerticalAlignment="Center" MinWidth="100" MaxWidth="300">
             <TextBlock Text="Логин"></TextBlock>
-            <TextBox x:Name="LoginTb"></TextBox>
+            <TextBox x:Name="LoginTb" Text="login1"></TextBox>
             <TextBlock Text="Пароль"></TextBlock>
-            <PasswordBox x:Name="PasswordPb"></PasswordBox>
+            <PasswordBox x:Name="PasswordPb" Password="password1"></PasswordBox>
             <Button Content="Вход" x:Name="Auth" Click="Auth_Click"></Button>
         </StackPanel>
     </Grid>

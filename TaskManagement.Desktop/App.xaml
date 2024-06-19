@@ -14,5 +14,11 @@
             <Setter Property="Background" Value="Orange"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
+        <Style TargetType="TextBlock" x:Key="TitleTextBlock">
+            <Setter Property="Foreground" Value="Orange"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="32"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
     </Application.Resources>
 </Application>

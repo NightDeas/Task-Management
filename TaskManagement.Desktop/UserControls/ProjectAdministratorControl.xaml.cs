@@ -21,12 +21,15 @@ namespace TaskManagement.Desktop.UserControls
     public partial class ProjectAdministratorControl : UserControl
     {
         Models.User User { get; set; }
+        bool Active { get; set; }
         Services.ProjectAdministratorInProjectService Service = new();
-        public ProjectAdministratorControl(Models.User user)
+        public ProjectAdministratorControl(Models.User user, bool active)
         {
             InitializeComponent();
             User = user;
-            DataContext = User;
+            Active = active;
+            FullNameTb.DataContext = User;
+            AvialableCb.IsChecked = Active;
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)

@@ -11,7 +11,7 @@
             <ColumnDefinition MinWidth="100" MaxWidth="400" />
             <ColumnDefinition Width="30" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Text="{Binding FullName}" FontSize="16"></TextBlock>
-        <CheckBox Grid.Column="1" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+        <TextBlock Grid.Column="0" x:Name="FullNameTb" Text="{Binding FullName}" FontSize="16"></TextBlock>
+        <CheckBox Grid.Column="1" x:Name="AvialableCb" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
     </Grid>
 </UserControl>

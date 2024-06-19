@@ -17,26 +17,44 @@ using TaskManagement.Desktop.Services;
 
 namespace TaskManagement.Desktop.UserControls
 {
-    /// <summary>
-    /// Логика взаимодействия для ProjectControl.xaml
-    /// </summary>
-    public partial class ProjectControl : UserControl
-    {
-        public ProjectModel Project { get; set; }
-        public ProjectControl(Models.ProjectModel project)
-        {
-            InitializeComponent();
-            Project = project;
-            DataContext = Project;
-        }
+	/// <summary>
+	/// Логика взаимодействия для ProjectControl.xaml
+	/// </summary>
+	public partial class ProjectControl : UserControl
+	{
+		public ProjectModel Project { get; set; }
+		public ProjectControl(Models.ProjectModel project)
+		{
+			InitializeComponent();
+			Project = project;
+			DataContext = Project;
+		}
 
-        private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            ProjectsPageService projectsPageService = new ProjectsPageService(Project.Id);
-            if (UserService.GetUser().Role.Id == 3) // employee
-                projectsPageService.FillTasksInPage(UserService.GetUser().Id);
-            else
-                projectsPageService.FillTasksInPage();
-        }
-    }
+
+		private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			ProjectsPageService projectsPageService = new ProjectsPageService(Project.Id);
+			ProjectsPageService.ProjectId = Project.Id;
+			ProjectsPageService.ProjectPage.TaskCreateBtn.Visibility = Visibility.Visible;
+			
+			//загрузка задач
+			switch (Services.AccessUser.GetRoleUser())
+			{
+				case AccessUser.Roles.Admin:
+					projectsPageService.FillTasksInPage();
+					projectsPageService.OpenEditProject(Project, true);
+					break;
+				case AccessUser.Roles.ProjectAdministrator:
+					projectsPageService.FillTasksInPage();
+					projectsPageService.OpenEditProject(Project, false);
+					break;
+				case AccessUser.Roles.Employee:
+					projectsPageService.FillTasksInPage(UserService.GetUser().Id);
+					projectsPageService.OpenEditProject(Project, false);
+					break;
+				default:
+					throw new Exception("Отсуствует роль");
+			}
+		}
+	}
 }

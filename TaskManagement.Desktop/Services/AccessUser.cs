@@ -22,9 +22,14 @@ namespace TaskManagement.Desktop.Services
             Allowed = 1,
             Forbidden
         }
+
+        public static Roles GetRoleUser()
+        {
+            return (Roles)UserService.GetUser().Role.Id;
+        }
         public static bool CheckAccess(Roles RequiredRole)
         {
-            if (UserService.GetUser().Role.Id == (int)RequiredRole)
+            if (GetRoleUser() == RequiredRole)
             {
                 Message(Access.Allowed);
                 return true;
@@ -36,8 +41,22 @@ namespace TaskManagement.Desktop.Services
             }
         }
 
+		public static bool CheckAccess(List<Roles> RequiredRoles)
+		{
+            if (RequiredRoles.Contains(GetRoleUser()))
+			{
+				Message(Access.Allowed);
+				return true;
+			}
+			else
+			{
+				Message(Access.Forbidden, RequiredRoles[0]);
+				return false;
+			}
+		}
 
-        public static void Message(Access typeAccess)
+
+		public static void Message(Access typeAccess)
         {
             switch (typeAccess)
             {
@@ -66,5 +85,5 @@ namespace TaskManagement.Desktop.Services
                     break;
             }
         }
-    }
+	}
 }

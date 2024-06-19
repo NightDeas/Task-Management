@@ -28,6 +28,6 @@
             
         </Grid>
         <Button x:Name="ProjectCreateBtn" Click="ProjectCreateBtn_Click" Content="Добавить проект" Grid.Row="1" Margin="5"></Button>
-        <Button x:Name="TaskCreateBtn" Content="Добавить задачу" Grid.Row="1" Grid.Column="1" Margin="5"></Button>
+        <Button x:Name="TaskCreateBtn" Click="TaskCreateBtn_Click" Visibility="Collapsed" Content="Добавить задачу" Grid.Row="1" Grid.Column="1" Margin="5"></Button>
     </Grid>
 </Page>

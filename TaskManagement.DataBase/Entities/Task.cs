@@ -14,7 +14,7 @@ namespace TaskManagement.DataBase.Entities
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
-        public DateTime? Deleted { get; set; }
+        public bool Deleted { get; set; }
         public DateTime StartDate { get; set; } 
         public DateTime? EndDate { get; set; }
         public DateTime Deadline { get; set; }
@@ -23,6 +23,5 @@ namespace TaskManagement.DataBase.Entities
         public virtual Project Project { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<HistoryChangeStatusTask> HistoryChangeStatusTask { get; set; }
-
-    }
+	}
 }
