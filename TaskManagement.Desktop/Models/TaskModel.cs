@@ -59,5 +59,24 @@ namespace TaskManagement.Desktop.Models
                 Status = historyChangeStatusTask.Status
             };
         }
+
+        public DataBase.Entities.Task ToDbModel()
+        {
+            return new Task()
+            {
+                Id = this.Id,
+                Created = this.Created,
+                Updated = this.Updated,
+                Deleted = this.Deleted,
+                StartDate = this.StartDate,
+                EndDate = this.EndDate,
+                Deadline = this.Deadline,
+                Name = this.Name,
+                Description = this.Description,
+                UserId = this.UserId,
+                ProjectId = this.ProjectId,
+            };
+
+        }
     }
 }
