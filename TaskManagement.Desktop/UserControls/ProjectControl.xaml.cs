@@ -35,26 +35,12 @@ namespace TaskManagement.Desktop.UserControls
 		{
 			ProjectsPageService projectsPageService = new ProjectsPageService(Project.Id);
 			ProjectsPageService.ProjectId = Project.Id;
+			ProjectsPageService.ProjectModel = Project;
 			ProjectsPageService.ProjectPage.TaskCreateBtn.Visibility = Visibility.Visible;
-			
+			StylesService.SetActiveStyle(this);
 			//загрузка задач
-			switch (Services.AccessUser.GetRoleUser())
-			{
-				case AccessUser.Roles.Admin:
-					projectsPageService.FillTasksInPage();
-					projectsPageService.OpenEditProject(Project, true);
-					break;
-				case AccessUser.Roles.ProjectAdministrator:
-					projectsPageService.FillTasksInPage();
-					projectsPageService.OpenEditProject(Project, false);
-					break;
-				case AccessUser.Roles.Employee:
-					projectsPageService.FillTasksInPage(UserService.GetUser().Id);
-					projectsPageService.OpenEditProject(Project, false);
-					break;
-				default:
-					throw new Exception("Отсуствует роль");
-			}
+			projectsPageService.LoadTasks(Project);
+			
 		}
-	}
+    }
 }

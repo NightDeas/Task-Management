@@ -40,7 +40,8 @@ namespace TaskManagement.Desktop.Models
                 Name = task.Name,
                 Description = task.Description,
                 User = new User().ToModel(task.User),
-                UserId = task.UserId
+                UserId = task.UserId,
+                ProjectId = task.ProjectId,
             };
         }
 
@@ -56,6 +57,8 @@ namespace TaskManagement.Desktop.Models
                 Name = historyChangeStatusTask.Task.Name,
                 Description = historyChangeStatusTask.Task.Description,
                 User = new User().ToModel(historyChangeStatusTask.Task.User),
+                UserId = new User().ToModel(historyChangeStatusTask.Task.User).Id,
+                ProjectId = historyChangeStatusTask.Task.ProjectId,
                 Status = historyChangeStatusTask.Status
             };
         }

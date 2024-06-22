@@ -6,7 +6,15 @@
              xmlns:local="clr-namespace:TaskManagement.Desktop.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
-    <Border Margin="10,5" Height="60" BorderThickness="1" BorderBrush="Black" CornerRadius="25" Background="White">
+    <UserControl.Resources>
+        <Style x:Key="ActiveStyle" TargetType="Border">
+            <Setter Property="Background" Value="Orange"/>
+        </Style>
+        <Style x:Key="DefaultStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </UserControl.Resources>
+    <Border Style="{StaticResource DefaultStyle}" x:Name="Border" Margin="10,5" Height="60" BorderThickness="1" BorderBrush="Black" CornerRadius="25">
         <Grid Margin="10,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />

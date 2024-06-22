@@ -222,6 +222,7 @@ namespace TaskManagement.Desktop.Services
 			Debug.WriteLine("DbService: Вход GetTasksThenProject");
 			Debug.WriteLine("DbService: Выход GetTasksThenProject");
 			return await _context.Tasks
+				.AsNoTracking()
 				.Include(x => x.Project)
 			   .ToListAsync();
 		}
@@ -231,15 +232,17 @@ namespace TaskManagement.Desktop.Services
 			Debug.WriteLine("DbService: Вход GetTasks");
 			Debug.WriteLine("DbService: Выход GetTasks");
 			return await _context.Tasks
+				.AsNoTracking()
 				.ToListAsync();
-		}
+        }
 
 		public static async Task<List<DataBase.Entities.HistoryChangeStatusTask>> GetHistoryChangeStatusTask()
 		{
 			Debug.WriteLine("DbService: Вход GetHistoryChangeStatusTask");
 			Debug.WriteLine("DbService: Выход GetHistoryChangeStatusTask");
 			return await _context.HistoryChangeStatusTask
-				.Include(x => x.Task)
+                .AsNoTracking()
+                .Include(x => x.Task)
 				.ToListAsync();
 		}
 
@@ -247,6 +250,7 @@ namespace TaskManagement.Desktop.Services
 		{
 			Debug.WriteLine("DbService: Вход GetHistoryChangeStatusTaskAsync");
 			var historyChangeStatusTasks = await _context.HistoryChangeStatusTask
+				.AsNoTracking()
 				.Include(x => x.Task)
 				.ThenInclude(x => x.User)
 				.Include(x => x.Status)
@@ -260,8 +264,9 @@ namespace TaskManagement.Desktop.Services
 			Debug.WriteLine("DbService: Вход GetHistoryChangeStatusTaskAsync");
 			Debug.WriteLine("DbService: Выход GetHistoryChangeStatusTaskAsync");
 			return await _context.HistoryChangeStatusTask
+				.AsNoTracking()
 				.Include(x => x.Task)
-				.Include(x => x.Status)
+                .Include(x => x.Status)
 				.Where(x => x.Task.UserId == userId && x.Task.ProjectId == projectId)
 				.ToListAsync();
 		}
@@ -329,8 +334,8 @@ namespace TaskManagement.Desktop.Services
 		{
 			Debug.WriteLine("DbService: Вход UpdateEntity");
 			DataBase.Entities.Task task = taskModel.ToDbModel();
-			_context.Entry(task).State = EntityState.Modified;
-			await SaveChangedAsync();
+			_context.Tasks.Update(task);
+			await _context.SaveChangesAsync();
 			Debug.WriteLine("DbService: Выход UpdateEntity");
 		}
 

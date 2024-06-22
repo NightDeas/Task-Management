@@ -53,7 +53,7 @@ namespace TaskManagement.Desktop.UserControls
                     border.Background = new SolidColorBrush(Colors.Blue);
                     break;
                 case 3:
-                    border.Background = new SolidColorBrush(Colors.Orange);
+                    border.Background = new SolidColorBrush(Colors.DarkGoldenrod);
                     break;
                 case 4:
                     border.Background = new SolidColorBrush(Colors.Red);
