@@ -18,30 +18,28 @@ using TaskManagement.Desktop.Services;
 namespace TaskManagement.Desktop.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для TaskControl.xaml
+    /// Логика взаимодействия для TaskInfoControl.xaml
     /// </summary>
-    public partial class TaskControl : UserControl
+    public partial class TaskInfoControl : UserControl
     {
         TaskModel Task { get; set; }
-        public TaskControl(Models.TaskModel task)
+        public TaskInfoControl(TaskModel model)
         {
             InitializeComponent();
-            Task = task;
+            this.Task = model;
             DataContext = Task;
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private async void EditBtn_Click(object sender, RoutedEventArgs e)
         {
-            UserControls.StatusControl statusControl = new UserControls.StatusControl(Task.Status);
-            statusControl.SetValue(Grid.ColumnProperty, 2);
-            ContentGrid.Children.Add(statusControl); 
-        }
-
-        private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            StylesService.SetActiveStyle(this);
+            bool access = await ProjectAdministratorService.AccessEditProject(ProjectsPageService.ProjectId) || AccessUser.CheckAccess(AccessUser.Roles.Admin);
+            if (!access)
+            {
+                AccessUser.Message(AccessUser.Access.Forbidden);
+                return;
+            }
             ProjectsPageService.ProjectPage.EditorControlGrid.Children.Clear();
-            ProjectsPageService.ProjectPage.EditorControlGrid.Children.Add(new UserControls.TaskInfoControl(Task));
+            ProjectsPageService.ProjectPage.EditorControlGrid.Children.Add(new UserControls.TaskEditControl(Task));
         }
     }
 }

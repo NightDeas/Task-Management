@@ -36,8 +36,9 @@ namespace TaskManagement.Desktop.UserControls
 		{
 			ProjectsPageService projectsPageService = new ProjectsPageService(Project.Id);
 			ProjectsPageService.ProjectId = Project.Id;
+			ProjectsPageService.ProjectModel = Project;
 			ProjectsPageService.ProjectPage.TaskCreateBtn.Visibility = Visibility.Visible;
-			
+			StylesService.SetActiveStyle(this);
 			//загрузка задач
 			switch (Services.AccessUser.GetRoleUser())
 			{
@@ -57,5 +58,5 @@ namespace TaskManagement.Desktop.UserControls
 					throw new Exception("Отсуствует роль");
 			}
 		}
-	}
+    }
 }

@@ -40,7 +40,8 @@ namespace TaskManagement.Desktop.Models
                 Name = task.Name,
                 Description = task.Description,
                 User = new User().ToModel(task.User),
-                UserId = task.UserId
+                UserId = task.UserId,
+                ProjectId = task.ProjectId,
             };
         }
 
@@ -56,29 +57,29 @@ namespace TaskManagement.Desktop.Models
                 Name = historyChangeStatusTask.Task.Name,
                 Description = historyChangeStatusTask.Task.Description,
                 User = new User().ToModel(historyChangeStatusTask.Task.User),
-                Status = historyChangeStatusTask.Status,
                 UserId = new User().ToModel(historyChangeStatusTask.Task.User).Id,
-                ProjectId = historyChangeStatusTask.Task.ProjectId
-			};
+                ProjectId = historyChangeStatusTask.Task.ProjectId,
+                Status = historyChangeStatusTask.Status
+            };
         }
 
         public DataBase.Entities.Task ToDbModel()
         {
-			return new Task()
-			{
+            return new Task()
+            {
                 Id = this.Id,
-				Created = this.Created,
-				Updated = this.Updated,
-				Deleted = this.Deleted,
-				StartDate = this.StartDate,
-				EndDate = this.EndDate,
-				Deadline = this.Deadline,
-				Name = this.Name,
-				Description = this.Description,
-				UserId = this.UserId,
-				ProjectId = this.ProjectId,
-			};
+                Created = this.Created,
+                Updated = this.Updated,
+                Deleted = this.Deleted,
+                StartDate = this.StartDate,
+                EndDate = this.EndDate,
+                Deadline = this.Deadline,
+                Name = this.Name,
+                Description = this.Description,
+                UserId = this.UserId,
+                ProjectId = this.ProjectId,
+            };
 
-		}
-	}
+        }
+    }
 }

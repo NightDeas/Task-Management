@@ -126,7 +126,7 @@ namespace TaskManagement.Desktop.UserControls
 
 		}
 
-		private StringBuilder ValidateValues()
+        private StringBuilder ValidateValues()
 		{
 			StringBuilder textError = new();
 			if (string.IsNullOrEmpty(Project.Name))
@@ -145,6 +145,9 @@ namespace TaskManagement.Desktop.UserControls
 				MessageBox.Show("Проект удален");
 			else
 				MessageBox.Show("Ошибка при удалении проекта");
-		}
+			await ProjectsPageService.LoadProjectsAsync();
+
+
+        }
 	}
 }

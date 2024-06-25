@@ -84,8 +84,9 @@ namespace TaskManagement.Desktop.Pages
 			await LoadDataAsync();
 		}
 
-		private void ProjectCreateBtn_Click(object sender, RoutedEventArgs e)
-		{
+        private void ProjectCreateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            StylesService.Reset();
 			ProjectsPageService.ClearTasksInPage();
 			ProjectsPageService.ProjectPage.TaskCreateBtn.Visibility = Visibility.Collapsed;
 			if (!Services.AccessUser.CheckAccess(AccessUser.Roles.Admin))
@@ -96,7 +97,8 @@ namespace TaskManagement.Desktop.Pages
 
 		private async void TaskCreateBtn_Click(object sender, RoutedEventArgs e)
 		{
-			bool access = await Services.ProjectAdministratorService.AccessEditProject(ProjectsPageService.ProjectId);
+            StylesService.Reset(StylesService.Controls.Task);
+            bool access = await Services.ProjectAdministratorService.AccessEditProject(ProjectsPageService.ProjectId);
 			if (!(AccessUser.GetRoleUser() == AccessUser.Roles.Admin || access))
 			{
 				AccessUser.Message(AccessUser.Access.Forbidden, AccessUser.Roles.ProjectAdministrator);
