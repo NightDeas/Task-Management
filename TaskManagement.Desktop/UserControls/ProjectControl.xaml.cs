@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,15 +43,15 @@ namespace TaskManagement.Desktop.UserControls
 			{
 				case AccessUser.Roles.Admin:
 					projectsPageService.FillTasksInPage();
-					projectsPageService.OpenEditProject(Project, true);
+					ProjectsPageService.OpenEditProject(Project, true);
 					break;
 				case AccessUser.Roles.ProjectAdministrator:
 					projectsPageService.FillTasksInPage();
-					projectsPageService.OpenEditProject(Project, false);
+					ProjectsPageService.OpenEditProject(Project, false);
 					break;
 				case AccessUser.Roles.Employee:
 					projectsPageService.FillTasksInPage(UserService.GetUser().Id);
-					projectsPageService.OpenEditProject(Project, false);
+					ProjectsPageService.OpenEditProject(Project, false);
 					break;
 				default:
 					throw new Exception("Отсуствует роль");

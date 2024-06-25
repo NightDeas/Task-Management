@@ -112,6 +112,9 @@ namespace TaskManagement.Desktop.UserControls
 				MessageBox.Show("Задача сохранена");
 			else
 				MessageBox.Show("Ошибка при сохранении задачи");
+			ProjectsPageService service = new(Task.ProjectId);
+			await ProjectsPageService.ProjectPage.LoadDataAsync();
+			service.FillTasksInPage();
 
 		}
 

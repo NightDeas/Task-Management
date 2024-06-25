@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using TaskManagement.Desktop.Models;
+using TaskManagement.Desktop.Pages;
 using TaskManagement.Desktop.Services;
 
 namespace TaskManagement.Desktop.UserControls
@@ -26,15 +28,17 @@ namespace TaskManagement.Desktop.UserControls
 	{
 		ProjectModel Project;
 		bool Edit;
-		public ProjectEditControl(ProjectModel project, bool allowEdit)
+		public enum Types
+		{
+			Create,
+			Update,
+			Information
+		}
+		public ProjectEditControl(ProjectModel project, Types type)
 		{
 			InitializeComponent();
-			Edit = allowEdit;
+			Edit = type == Types.Information? false : true;
 			Project = project;
-			if (Project == null)
-				DeleteBtn.Visibility = Visibility.Collapsed;
-			else
-				DeleteBtn.Visibility = Visibility.Visible;
 			ConfigPage();
 			if (Project == null)
 				Project = new();
@@ -59,6 +63,13 @@ namespace TaskManagement.Desktop.UserControls
 					TitleTb.Text = "Информация о проекте";
 					break;
 			}
+			if (Project == null)
+			{
+				DeleteBtn.Visibility = Visibility.Collapsed;
+				TitleTb.Text = "Создание проекта";
+			}
+			else
+				DeleteBtn.Visibility = Visibility.Visible;
 		}
 
 		private void CreateProjectAdminsList()
@@ -110,6 +121,9 @@ namespace TaskManagement.Desktop.UserControls
 			else
 				MessageBox.Show("Ошибка при сохранении проекта");
 			projectAdministratorInProjectService.ResetList();
+			await ProjectsPageService.ProjectPage.LoadDataAsync();
+
+
 		}
 
 		private StringBuilder ValidateValues()

@@ -14,9 +14,9 @@
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.7*" />
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="0.7*" />
         </Grid.ColumnDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical" x:Name="ProjectsStackPanel"/>

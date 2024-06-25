@@ -45,12 +45,12 @@ namespace TaskManagement.Desktop.Services
 			ProjectPage.TasksStackPanel.Children.Clear();
 		}
 
-		public void OpenEditProject(ProjectModel project, bool allowEdit)
+		public static void OpenEditProject(ProjectModel project, bool allowEdit)
 		{
+			UserControls.ProjectEditControl.Types typeOperation = allowEdit == true ? UserControls.ProjectEditControl.Types.Update : UserControls.ProjectEditControl.Types.Information;
 			ProjectPage.EditorControlGrid.Children.Clear();
-			UserControls.ProjectEditControl projectEditControl = new(project, allowEdit);
+			UserControls.ProjectEditControl projectEditControl = new(project, typeOperation);
 			ProjectPage.EditorControlGrid.Children.Add(projectEditControl);
-
 		}
 	}
 }
