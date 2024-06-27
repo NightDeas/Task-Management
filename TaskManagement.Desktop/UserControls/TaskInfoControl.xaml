@@ -10,7 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="70" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <TextBlock Text="Информация о задаче" Style="{StaticResource TitleTextBlock}"></TextBlock>
         <Grid Grid.Row="1">
@@ -26,17 +26,43 @@
                 <StackPanel>
                     <TextBlock Grid.Row="0" Text="{Binding Name, StringFormat=Название: {0}}"></TextBlock>
                     <TextBlock Grid.Row="1" Text="{Binding Description, StringFormat=Описание: {0}}"></TextBlock>
-                    <TextBlock Grid.Row="2" Text="{Binding User.FullName, StringFormat=Исполнитель: {0}}"></TextBlock>
-                    <TextBlock Grid.Row="3" Text="{Binding Created, StringFormat=Дата создания: {0:dd.MM.yyyy HH:mm}}"></TextBlock>
-                    <TextBlock Grid.Row="4" Text="{Binding Updated, StringFormat=Дата обновления: {0:dd.MM.yyyy HH:mm}}"></TextBlock>
-                    <TextBlock Grid.Row="5" Text="{Binding StartDate, StringFormat=Дата начала выполнения: {0:dd.MM.yyyy HH:mm}}"></TextBlock>
-                    <TextBlock Grid.Row="6" Text="{Binding EndDate, StringFormat=Дата окончания выполнения: {0:dd.MM.yyyy HH:mm}}"></TextBlock>
+                    <TextBlock Grid.Row="2" Text="{Binding User.FullName, StringFormat=Исполнитель: {0}, Mode=OneWay}"></TextBlock>
+                    <TextBlock Grid.Row="3" Text="{Binding Created, StringFormat=Дата создания: {0:dd.MM.yyyy HH:mm}, Mode=OneWay}"></TextBlock>
+                    <TextBlock Grid.Row="4" Text="{Binding Updated, StringFormat=Дата обновления: {0:dd.MM.yyyy HH:mm}, Mode=OneWay}"></TextBlock>
+                    <TextBlock Grid.Row="5" Text="{Binding StartDate, StringFormat=Дата начала выполнения: {0:dd.MM.yyyy HH:mm}, Mode=OneWay}"></TextBlock>
+                    <TextBlock Grid.Row="6" Text="{Binding EndDate, StringFormat=Дата окончания выполнения: {0:dd.MM.yyyy HH:mm}, Mode=OneWay}"></TextBlock>
                     <TextBlock Grid.Row="7" Text="{Binding Deadline, StringFormat=Дедлайн: {0:dd.MM.yyyy HH:mm}}"></TextBlock>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Grid Grid.Row="2">
-            <Button Content="Редактировать задачу" x:Name="EditBtn" Click="EditBtn_Click" Margin="5" FontSize="16"></Button>
+        <Grid Grid.Row="2" x:Name="ButtonsGrid">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="Margin" Value="5"></Setter>
+                    <Setter Property="Height" Value="40"></Setter>
+                    <Setter Property="MinWidth" Value="40"></Setter>
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Button Content="Отправить задачу на рассмотрение" x:Name="SendTaskBtn" Click="SendTaskBtn_Click"></Button>
+            <Button Content="Редактировать задачу" x:Name="EditBtn" Click="EditBtn_Click"></Button>
+            <Button Content="Закрыть задачу" x:Name="CloseTaskBtn" Click="CloseTaskBtn_Click"></Button>
+            <Button Content="Вернуть задачу" x:Name="BackTaskBtn" Click="BackTaskBtn_Click"></Button>
+
+            <!--Обратные кнопки-->
+            <Button Content="Отозвать задачу с рассмотрения" x:Name="ReverseSendTaskBtn" Click="SendTaskBtn_Click"></Button>
+            <Button Content="Открыть задачу" x:Name="ReverseCloseTaskBtn" Click="CloseTaskBtn_Click"></Button>
+            <Button Content="Принять задачу" x:Name="ReverseBackTaskBtn" Click="BackTaskBtn_Click"></Button>
         </Grid>
     </Grid>
 </UserControl>

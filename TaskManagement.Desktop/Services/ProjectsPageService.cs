@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using TaskManagement.DataBase.Entities;
 using TaskManagement.Desktop.Models;
 using TaskManagement.Desktop.Pages;
+using TaskManagement.Desktop.UserControls;
 
 namespace TaskManagement.Desktop.Services
 {
@@ -36,7 +37,6 @@ namespace TaskManagement.Desktop.Services
             var tasks = await DbService.GetHistoryChangeStatusTask();
             var groupTasks = tasks.GroupBy(x => x.Task).Select(x => x.Last()).ToList();
             var historyChangeStatus = await DbService.GetHistoryChangeStatusTask();
-            ClearProjectInPage();
             FillProjects(projects, groupTasks, historyChangeStatus);
             FillStackPanel();
         }
@@ -97,7 +97,10 @@ namespace TaskManagement.Desktop.Services
 			var tasks = await DbService.GetHistoryChangeStatusTaskAsync(ProjectId);
 			foreach (var task in tasks)
 			{
-				ProjectPage.TasksStackPanel.Children.Add(new UserControls.TaskControl(TaskModel.ToModel(task)));
+                TaskControl control = (new UserControls.TaskControl(TaskModel.ToModel(task)));
+                if (StylesService.TaskControl != null && StylesService.TaskControl.Task.Id == task.Id)
+                    StylesService.SetActiveStyle(control);
+                ProjectPage.TasksStackPanel.Children.Add(control);
 			}
 		}
 

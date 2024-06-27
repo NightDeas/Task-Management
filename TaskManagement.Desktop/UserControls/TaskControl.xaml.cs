@@ -22,7 +22,7 @@ namespace TaskManagement.Desktop.UserControls
     /// </summary>
     public partial class TaskControl : UserControl
     {
-        TaskModel Task { get; set; }
+        public TaskModel Task { get; set; }
         public TaskControl(Models.TaskModel task)
         {
             InitializeComponent();

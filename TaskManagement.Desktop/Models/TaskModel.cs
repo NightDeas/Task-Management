@@ -14,11 +14,11 @@ namespace TaskManagement.Desktop.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-		public DateTime Created { get; set; }
-		public DateTime Updated { get; set; }
+		public DateTime Created { get; set;  }
+		public DateTime? Updated { get; set; }
 		public bool Deleted { get; set; }
 
-		public DateTime StartDate { get; set; }
+		public DateTime? StartDate { get; set; }
 
         public DateTime? EndDate { get; set; }
         public DateTime Deadline { get; set; }
@@ -51,7 +51,8 @@ namespace TaskManagement.Desktop.Models
             {
                 Id = historyChangeStatusTask.TaskId,
                 Created = historyChangeStatusTask.Task.Created,
-                StartDate = historyChangeStatusTask.Task.StartDate,
+                Updated = historyChangeStatusTask.Task.Updated,
+				StartDate = historyChangeStatusTask.Task.StartDate,
                 EndDate = historyChangeStatusTask.Task.EndDate,
                 Deadline = historyChangeStatusTask.Task.Deadline,
                 Name = historyChangeStatusTask.Task.Name,

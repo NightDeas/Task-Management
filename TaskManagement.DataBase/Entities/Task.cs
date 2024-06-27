@@ -15,7 +15,7 @@ namespace TaskManagement.DataBase.Entities
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
         public bool Deleted { get; set; }
-        public DateTime StartDate { get; set; } 
+        public DateTime? StartDate { get; set; } 
         public DateTime? EndDate { get; set; }
         public DateTime Deadline { get; set; }
         public int ProjectId { get; set; }

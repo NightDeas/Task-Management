@@ -266,8 +266,11 @@ namespace TaskManagement.Desktop.Services
 			return await _context.HistoryChangeStatusTask
 				.AsNoTracking()
 				.Include(x => x.Task)
-                .Include(x => x.Status)
+				.ThenInclude(x => x.User)
+				.Include(x => x.Status)
 				.Where(x => x.Task.UserId == userId && x.Task.ProjectId == projectId)
+				.GroupBy(x => x.TaskId)
+				.Select(g=> g.OrderBy(x=> x.Id).Last())
 				.ToListAsync();
 		}
 
@@ -326,6 +329,7 @@ namespace TaskManagement.Desktop.Services
 			DataBase.Entities.Task task = taskModel.ToDbModel();
 			_context.Entry(task).State = EntityState.Added;
 			await SaveChangedAsync();
+			_context.Entry(task).State = EntityState.Detached;
 			Debug.WriteLine("DbService: выход AddEntity");
 			return task.Id;
 		}
@@ -334,8 +338,10 @@ namespace TaskManagement.Desktop.Services
 		{
 			Debug.WriteLine("DbService: Вход UpdateEntity");
 			DataBase.Entities.Task task = taskModel.ToDbModel();
+			task.Updated = DateTime.Now;
 			_context.Tasks.Update(task);
 			await _context.SaveChangesAsync();
+			_context.Entry(task).State = EntityState.Detached;
 			Debug.WriteLine("DbService: Выход UpdateEntity");
 		}
 

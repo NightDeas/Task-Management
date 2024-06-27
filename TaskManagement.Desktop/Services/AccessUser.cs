@@ -31,12 +31,10 @@ namespace TaskManagement.Desktop.Services
         {
             if (GetRoleUser() == RequiredRole)
             {
-                Message(Access.Allowed);
                 return true;
             }
             else
             {
-                Message(Access.Forbidden, RequiredRole);
                 return false;
             }
         }

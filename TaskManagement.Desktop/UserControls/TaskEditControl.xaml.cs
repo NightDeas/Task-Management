@@ -86,6 +86,8 @@ namespace TaskManagement.Desktop.UserControls
 		private async void SaveBtn_Click(object sender, RoutedEventArgs e)
 		{
 			string textError = ValidateValues().ToString();
+            TimeSpan time = ConvertStringToTime(TimeTb.Text);
+            Task.Deadline = new(Task.Deadline.Year, Task.Deadline.Month, Task.Deadline.Day, time.Hours, time.Minutes, 0);
 			if (textError.Length != 0)
 			{
 				MessageBox.Show(textError, "Ошибка при заполнении данных", MessageBoxButton.OK);
@@ -113,9 +115,9 @@ namespace TaskManagement.Desktop.UserControls
 				MessageBox.Show("Задача сохранена");
 			else
 				MessageBox.Show("Ошибка при сохранении задачи");
-			ProjectsPageService service = new(Task.ProjectId);
+			ProjectsPageService projectPageService = new(Task.ProjectId);
 			await ProjectsPageService.ProjectPage.LoadDataAsync();
-			service.FillTasksInPage();
+			projectPageService.FillTasksInPage();
 
         }
 
@@ -141,8 +143,8 @@ namespace TaskManagement.Desktop.UserControls
                 textError.AppendLine("Не заполнено поле: Описание");
             if (Task.UserId == 0)
                 textError.AppendLine("Не выбран сотрудник для выполнения задачи");
-            if (Task.Deadline.Date < DateTime.Now.Date)
-                textError.AppendLine($"Дата дедлайна не может быть раньше сегодняшего дня({DateTime.Now.Date})");
+            //if (Task.Deadline.Date < DateTime.Now.Date)
+            //    textError.AppendLine($"Дата дедлайна не может быть раньше сегодняшего дня({DateTime.Now.Date})");
             if (!new Regex(@"(\d){1,2}:(\d){1,2}").IsMatch(TimeTb.Text) || !succesParseTime)
                 textError.AppendLine("Требуется указать время дедлайна в формате: чч:мм, где чч - часы(от 0 до 23), где мм - минуты(от 0 до 60)");
 
