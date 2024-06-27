@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace TaskManagement.Desktop.ViewModels
 {
-	internal class TaskInfoButtons : ViewModelBase
-	{
-	}
+
 }
