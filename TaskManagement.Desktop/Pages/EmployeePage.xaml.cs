@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TaskManagement.Desktop.Services;
 
 namespace TaskManagement.Desktop.Pages
 {
@@ -23,6 +24,12 @@ namespace TaskManagement.Desktop.Pages
         public EmployeePage()
         {
             InitializeComponent();
+            Services.EmployeePageService.EmployeePage = this;
         }
-    }
+
+		private async void Page_Loaded(object sender, RoutedEventArgs e)
+		{
+            EmployeePageService.LoadUsers();
+		}
+	}
 }

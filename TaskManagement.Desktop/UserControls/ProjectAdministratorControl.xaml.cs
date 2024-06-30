@@ -20,10 +20,10 @@ namespace TaskManagement.Desktop.UserControls
     /// </summary>
     public partial class ProjectAdministratorControl : UserControl
     {
-        Models.User User { get; set; }
+        Models.UserModel User { get; set; }
         bool Active { get; set; }
         Services.ProjectAdministratorInProjectService Service = new();
-        public ProjectAdministratorControl(Models.User user, bool active)
+        public ProjectAdministratorControl(Models.UserModel user, bool active)
         {
             InitializeComponent();
             User = user;

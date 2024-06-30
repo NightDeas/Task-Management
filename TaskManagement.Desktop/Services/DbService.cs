@@ -37,7 +37,7 @@ namespace TaskManagement.Desktop.Services
             Debug.WriteLine("Проверка соединения с БД");
             bool canConnect = false;
             int count = 1;
-            await Task.Run(async () =>
+            Task.Factory.StartNew(async () =>
             {
                 while (!canConnect)
                 {
@@ -61,7 +61,7 @@ namespace TaskManagement.Desktop.Services
         /// <param name="users">Список руководителей</param>
         /// <param name="projectId">Id проекта</param>
         /// <returns>true - если сущности добавились без ошибок, false - сущности не бьыли добавлены</returns>
-        public static async Task AddEntity(List<Models.User> users, int projectId)
+        public static async Task AddEntity(List<Models.UserModel> users, int projectId)
         {
 
             DataBase.Entities.ProjectProjectAdministrator projectProjectAdministrator;
@@ -139,31 +139,42 @@ namespace TaskManagement.Desktop.Services
         }
 
 
-        public static async Task<Models.User> GetUserAsync(string login, string password)
+        public static async Task<Models.UserModel> GetUserAsync(string login, string password)
         {
-
-            var user = await _context.Users
+            Context context = new();
+			var user = await context.Users
                 .Include(x => x.Role)
                 .FirstOrDefaultAsync(x => x.Login == login && x.Password == password);
 
-            return new Models.User().ToModel(user);
+            return new Models.UserModel().ToModel(user);
         }
 
-        public static async Task<List<Models.User>> GetUsersAsync(AccessUser.Roles role)
+
+		public static async Task<List<DataBase.Entities.User>> GetUsersAsync()
+		{
+			Context context = new();
+
+			var users = await _context.Users
+                .AsNoTracking()
+				.ToListAsync();
+
+			return users;
+		}
+		public static async Task<List<DataBase.Entities.User>> GetUsersAsync(AccessUser.Roles role)
         {
 
             //var users = await _context.Users
             //	.Where(x => x.RoleId == (int)role)
             //	.ToListAsync();
-            Context context = new(); // для избежания исключения
+            Context context = new();
 
 
-            var users = await context.Users
-                .Where(x => x.RoleId == (int)role)
+			var users = await _context.Users
+				.AsNoTracking()
+				.Where(x => x.RoleId == (int)role)
                 .ToListAsync();
-            var usersModels = new Models.User().ToModel(users);
 
-            return usersModels;
+            return users;
         }
 
         public static async Task<bool> CheckAccessEditTaskAsync(int projectId)
@@ -343,6 +354,8 @@ namespace TaskManagement.Desktop.Services
 
         public static async Task<List<HistoryChangeStatusTask>> GetHistoryChangeStatusTaskAsync(int projectId, string searchText)
         {
+            if (!await CanConntect())
+                return new();
             return await _context.HistoryChangeStatusTask
               .AsNoTracking()
               .Include(x => x.Task)
@@ -354,7 +367,10 @@ namespace TaskManagement.Desktop.Services
               x.Task.EndDate.ToString().Contains(searchText) ||
               x.Task.Deadline.ToString().Contains(searchText) ||
               x.Task.Description.Contains(searchText) ||
-              x.Task.Updated.ToString().Contains(searchText)))
+              x.Task.Updated.ToString().Contains(searchText) ||
+              x.Task.User.LastName.Contains(searchText) ||
+			  x.Task.User.FirstName.Contains(searchText) ||
+			  x.Task.User.Patronymic.Contains(searchText)))
               .GroupBy(x => x.TaskId)
               .Select(g => g.OrderBy(x => x.Id).Last())
               .ToListAsync();
@@ -366,7 +382,7 @@ namespace TaskManagement.Desktop.Services
             return await _context.Statuses.FirstOrDefaultAsync(x => x.Id == statusId);
         }
 
-        public static async Task UpdateListProjectProjectAdministrators(List<Models.User> projectsAdministrators, int projectId)
+        public static async Task UpdateListProjectProjectAdministrators(List<Models.UserModel> projectsAdministrators, int projectId)
         {
 
             List<DataBase.Entities.ProjectProjectAdministrator> projectadmins =
@@ -458,6 +474,31 @@ namespace TaskManagement.Desktop.Services
 
         }
 
-        
-    }
+        public static async Task<int> GetCountCompletedTasksByUserAsync(int userId)
+        {
+            Context context = new();
+            //if (!await CanConntect())
+            //    return 0;
+            return await context.HistoryChangeStatusTask
+                .AsNoTracking()
+                .Include(x => x.Task)
+                .Where(x => x.Task.UserId == userId && x.StatusId == (int)Models.StatusModel.TaskStatuses.Closed)
+                .CountAsync();
+        }
+
+		public static async Task<int> GetCountNotCompletedTasksByUserAsync(int userId)
+		{
+            Context context = new();
+			//if (!await CanConntect())
+			//	return 0;
+			return await context.HistoryChangeStatusTask
+                .AsNoTracking()
+				.Include(x => x.Task)
+				.Where(x => x.Task.UserId == userId && x.StatusId != (int)Models.StatusModel.TaskStatuses.Closed)
+				.CountAsync();
+		}
+
+
+
+	}
 }

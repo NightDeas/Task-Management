@@ -21,7 +21,7 @@ namespace TaskManagement.Desktop.UserControls
 	/// </summary>
 	public partial class ProjectAdministratorListControl : UserControl
 	{
-		List<Models.User> ProjectsAdministrators { get; set; }
+		List<Models.UserModel> ProjectsAdministrators { get; set; }
 		private int ProjectId { get; set; }
 		private bool OnlySelected { get; set; }
 		public ProjectAdministratorListControl()
@@ -37,7 +37,8 @@ namespace TaskManagement.Desktop.UserControls
 
 		private async void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			ProjectsAdministrators = await DbService.GetUsersAsync(AccessUser.Roles.ProjectAdministrator);
+			var usersModels = new Models.UserModel().ToModel(await DbService.GetUsersAsync(AccessUser.Roles.ProjectAdministrator));
+			ProjectsAdministrators = usersModels;
 			Services.ProjectAdministratorInProjectService service = new();
 			service.ResetList();
 			await FillStackPanel(ProjectsAdministrators);
@@ -58,7 +59,7 @@ namespace TaskManagement.Desktop.UserControls
 			await FillStackPanel(resultSearch);
 		}
 
-		private async Task FillStackPanel(List<Models.User> projectsAdministrators)
+		private async Task FillStackPanel(List<Models.UserModel> projectsAdministrators)
 		{
 			ListProjectAdministratorsStackPanel.Children.Clear();
 			List<DataBase.Entities.User> projectAdminsInProject = new();

@@ -94,7 +94,7 @@ namespace TaskManagement.Desktop.Services
         public async void FillTasksInPage()
 		{
 			ClearTasksInPage();
-			var tasks = await DbService.GetHistoryChangeStatusTaskAsync(ProjectId);
+            var tasks = await DbService.GetHistoryChangeStatusTaskAsync(ProjectId);
 			foreach (var task in tasks)
 			{
                 TaskControl control = (new UserControls.TaskControl(TaskModel.ToModel(task)));
@@ -102,9 +102,10 @@ namespace TaskManagement.Desktop.Services
                     StylesService.SetActiveStyle(control);
                 ProjectPage.TasksStackPanel.Children.Add(control);
 			}
+			ProjectPage.ScroolTasks.Visibility = System.Windows.Visibility.Visible;
 		}
 
-        public async void FillTasksInPage(string searchText)
+		public async void FillTasksInPage(string searchText)
         {
             ClearTasksInPage();
             var tasks = await DbService.GetHistoryChangeStatusTaskAsync(ProjectId, searchText);
@@ -115,6 +116,7 @@ namespace TaskManagement.Desktop.Services
                     StylesService.SetActiveStyle(control);
                 ProjectPage.TasksStackPanel.Children.Add(control);
             }
+            ProjectPage.ScroolTasks.Visibility = System.Windows.Visibility.Visible;
         }
 
         public async void FillTasksInPage(int EmployeeId)

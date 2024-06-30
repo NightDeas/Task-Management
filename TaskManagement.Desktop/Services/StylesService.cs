@@ -16,15 +16,25 @@ namespace TaskManagement.Desktop.Services
 	{
 		public static ProjectControl ProjectControl { get; set; }
 		public static TaskControl TaskControl { get; set; }
+		public static EmployeeControl EmployeeControl{ get; set; }
 		public static int TaskId { get; set; }
 		public enum Controls
 		{
 			Project,
-			Task
+			Task,
+			Employee
 		}
 		public static Style FindStyle(System.Windows.Controls.UserControl userControl, string key)
 		{
 			return (Style)userControl.Resources[key];
+		}
+
+		public static void SetActiveStyle(EmployeeControl employeeControl)
+		{
+			if (EmployeeControl != null)
+				EmployeeControl.Border.Style = EmployeeControl.Resources["DefaultStyle"] as Style;
+			EmployeeControl = employeeControl;
+			EmployeeControl.Border.Style = (Style)EmployeeControl.Resources["ActiveStyle"];
 		}
 
 		public static void SetActiveStyle(ProjectControl projectControl)
@@ -60,6 +70,10 @@ namespace TaskManagement.Desktop.Services
 				case Controls.Task:
 					if (TaskControl != null)
 						TaskControl.Border.Style = TaskControl.Resources["DefaultStyle"] as Style;
+					break;
+				case Controls.Employee:
+					if (EmployeeControl != null)
+						EmployeeControl.Border.Style = EmployeeControl.Resources["DefaultStyle"] as Style;
 					break;
 			}
 		}

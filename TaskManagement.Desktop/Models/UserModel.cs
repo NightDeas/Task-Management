@@ -8,7 +8,7 @@ using TaskManagement.DataBase.Entities;
 
 namespace TaskManagement.Desktop.Models
 {
-    public class User
+    public class UserModel
     {
         public int Id { get; set; }
         public string LastName { get;set; }
@@ -19,11 +19,11 @@ namespace TaskManagement.Desktop.Models
         public string ShortName { get => Patronymic == null ? $"{LastName}. {FirstName.First()}" : $"{LastName}. {FirstName.First()}. {Patronymic.First()}"; }
 
 
-        public User ToModel(DataBase.Entities.User user)
+        public UserModel ToModel(DataBase.Entities.User user)
         {
             if (user == null)
                 return null;
-            return new User()
+            return new UserModel()
             {
                 Id = user.Id,
                 LastName = user.LastName,
@@ -33,7 +33,7 @@ namespace TaskManagement.Desktop.Models
             };
         }
 
-        public List<User> ToModel(List<DataBase.Entities.User> users)
+        public List<UserModel> ToModel(List<DataBase.Entities.User> users)
         {
             if (users == null)
                 return null;

@@ -11,14 +11,14 @@ namespace TaskManagement.Desktop.Services
 {
     public static class UserService
     {
-        private static Models.User User;
+        private static Models.UserModel User;
 
-        public static Models.User GetUser()
+        public static Models.UserModel GetUser()
         {
             return User;
         }
 
-        public static void SetUser(Models.User user)
+        public static void SetUser(Models.UserModel user)
         {
             User = user;
         }

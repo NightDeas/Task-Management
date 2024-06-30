@@ -11,6 +11,7 @@
         <Style TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="Margin" Value="10,5"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
     </Page.Resources>
     <Grid>
@@ -20,7 +21,19 @@
             <TextBox x:Name="LoginTb" Text="log1"></TextBox>
             <TextBlock Text="Пароль"></TextBlock>
             <PasswordBox x:Name="PasswordPb" Password="pas1"></PasswordBox>
-            <Button Content="Вход" x:Name="Auth" Click="Auth_Click"></Button>
+            <Button Content="Вход" x:Name="Auth" Click="Auth_Click">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Padding" Value="10,5"></Setter>
+                        <Setter Property="Margin" Value="10"></Setter>
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"></Setter>
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

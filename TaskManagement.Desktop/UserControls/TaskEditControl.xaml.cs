@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -49,8 +50,8 @@ namespace TaskManagement.Desktop.UserControls
                 DeadlineDatePicker.SelectedDate = DateTime.Now;
             else
                 TimeTb.Text = ConvertTimeToString(Task.Deadline);
-
-            EmployeesCb.ItemsSource = await DbService.GetUsersAsync(AccessUser.Roles.Employee);
+			var usersModels = new Models.UserModel().ToModel(await DbService.GetUsersAsync(AccessUser.Roles.Employee));
+            EmployeesCb.ItemsSource = usersModels;
         }
 
         private string ConvertTimeToString(DateTime time)

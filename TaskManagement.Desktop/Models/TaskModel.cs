@@ -24,7 +24,7 @@ namespace TaskManagement.Desktop.Models
         public DateTime Deadline { get; set; }
         public int UserId { get;set; } 
         public int ProjectId { get; set; }
-        public User User { get; set; }
+        public UserModel User { get; set; }
 
         public Status Status { get; set; }
 
@@ -39,7 +39,7 @@ namespace TaskManagement.Desktop.Models
                 Deadline = task.Deadline,
                 Name = task.Name,
                 Description = task.Description,
-                User = new User().ToModel(task.User),
+                User = new UserModel().ToModel(task.User),
                 UserId = task.UserId,
                 ProjectId = task.ProjectId,
             };
@@ -57,8 +57,8 @@ namespace TaskManagement.Desktop.Models
                 Deadline = historyChangeStatusTask.Task.Deadline,
                 Name = historyChangeStatusTask.Task.Name,
                 Description = historyChangeStatusTask.Task.Description,
-                User = new User().ToModel(historyChangeStatusTask.Task.User),
-                UserId = new User().ToModel(historyChangeStatusTask.Task.User).Id,
+                User = new UserModel().ToModel(historyChangeStatusTask.Task.User),
+                UserId = new UserModel().ToModel(historyChangeStatusTask.Task.User).Id,
                 ProjectId = historyChangeStatusTask.Task.ProjectId,
                 Status = historyChangeStatusTask.Status
             };
