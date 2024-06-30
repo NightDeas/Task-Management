@@ -25,13 +25,13 @@
             <ScrollViewer>
                 <StackPanel>
                     <TextBlock Grid.Row="0" Text="{Binding Name, StringFormat=Название: {0}}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="{Binding Description, StringFormat=Описание: {0}}"></TextBlock>
+                    <TextBlock TextWrapping="Wrap" Grid.Row="1" Text="{Binding Description, StringFormat=Описание: {0}}"></TextBlock>
                     <TextBlock Grid.Row="2" Text="{Binding User.FullName, StringFormat=Исполнитель: {0}, Mode=OneWay}"></TextBlock>
                     <TextBlock Grid.Row="3" Text="{Binding Created, StringFormat=Дата создания: {0:dd.MM.yyyy HH:mm}, Mode=OneWay}"></TextBlock>
                     <TextBlock Grid.Row="4" Text="{Binding Updated, StringFormat=Дата обновления: {0:dd.MM.yyyy HH:mm}, Mode=OneWay}"></TextBlock>
                     <TextBlock Grid.Row="5" Text="{Binding StartDate, StringFormat=Дата начала выполнения: {0:dd.MM.yyyy HH:mm}, Mode=OneWay}"></TextBlock>
                     <TextBlock Grid.Row="6" Text="{Binding EndDate, StringFormat=Дата окончания выполнения: {0:dd.MM.yyyy HH:mm}, Mode=OneWay}"></TextBlock>
-                    <TextBlock Grid.Row="7" Text="{Binding Deadline, StringFormat=Дедлайн: {0:dd.MM.yyyy HH:mm}}"></TextBlock>
+                    <TextBlock x:Name="DeadlineTb" Grid.Row="7" Text="{Binding Deadline, StringFormat=Дедлайн: {0:dd.MM.yyyy HH:mm}}"></TextBlock>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
@@ -58,11 +58,12 @@
             <Button Content="Редактировать задачу" x:Name="EditBtn" Click="EditBtn_Click"></Button>
             <Button Content="Закрыть задачу" x:Name="CloseTaskBtn" Click="CloseTaskBtn_Click"></Button>
             <Button Content="Вернуть задачу" x:Name="BackTaskBtn" Click="BackTaskBtn_Click"></Button>
+            <Button Content="Начать выполнение задачи" x:Name="StartWorkBtn" Click="StartWorkBtn_Click"></Button>
 
             <!--Обратные кнопки-->
-            <Button Content="Отозвать задачу с рассмотрения" x:Name="ReverseSendTaskBtn" Click="SendTaskBtn_Click"></Button>
-            <Button Content="Открыть задачу" x:Name="ReverseCloseTaskBtn" Click="CloseTaskBtn_Click"></Button>
-            <Button Content="Принять задачу" x:Name="ReverseBackTaskBtn" Click="BackTaskBtn_Click"></Button>
+            <Button Content="Отозвать задачу с рассмотрения" x:Name="ReverseSendTaskBtn" Click="ReverseSendTaskBtn_Click"></Button>
+            <Button Content="Открыть задачу" x:Name="ReverseCloseTaskBtn" Click="ReverseCloseTaskBtn_Click"></Button>
+            <Button Content="Принять задачу" x:Name="ReverseBackTaskBtn" Click="ReverseBackTaskBtn_Click"></Button>
         </Grid>
     </Grid>
 </UserControl>

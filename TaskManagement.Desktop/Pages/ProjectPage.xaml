@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TaskManagement.Desktop.Pages"
+      xmlns:UserControls="clr-namespace:TaskManagement.Desktop.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProjectPage" Loaded="Page_LoadedAsync">
@@ -19,10 +20,16 @@
             <ColumnDefinition Width="0.7*" />
         </Grid.ColumnDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Vertical" x:Name="ProjectsStackPanel"/>
+            <StackPanel>
+                <UserControls:SearchTextBox EntityType="Project"></UserControls:SearchTextBox>
+                <StackPanel Orientation="Vertical" x:Name="ProjectsStackPanel"/>
+            </StackPanel>
         </ScrollViewer>
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <UserControls:SearchTextBox EntityType="Task"></UserControls:SearchTextBox>
             <StackPanel x:Name="TasksStackPanel"/>
+            </StackPanel>
         </ScrollViewer>
         <Grid Grid.Column="3" x:Name="EditorControlGrid">
             

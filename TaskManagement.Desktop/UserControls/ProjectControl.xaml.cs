@@ -39,6 +39,7 @@ namespace TaskManagement.Desktop.UserControls
 			ProjectsPageService.ProjectModel = Project;
 			ProjectsPageService.ProjectPage.TaskCreateBtn.Visibility = Visibility.Visible;
 			StylesService.SetActiveStyle(this);
+			StylesService.Reset(StylesService.Controls.Task);
 			//загрузка задач
 			switch (Services.AccessUser.GetRoleUser())
 			{

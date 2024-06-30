@@ -39,8 +39,16 @@ namespace TaskManagement.DataBase
 		{
 			return $"{Random.Shared.Next(1000, 9999)} {Random.Shared.Next(100000, 999999)}";
 		}
+        /// <summary>
+        /// Генерация серии и номера с паспорта с разделителем
+        /// </summary>
+        /// <returns></returns>
+        public static string GeneratePassport(char symbol)
+        {
+            return $"{Random.Shared.Next(1000, 9999)}{symbol}{Random.Shared.Next(100000, 999999)}";
+        }
 
-		public static DateTime GenerateDate()
+        public static DateTime GenerateDate()
 		{
 			Random random = new Random();
 			int year = random.Next(1970, DateTime.Today.Year);

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Desktop", "TaskManagement.Desktop\TaskManagement.Desktop.csproj", "{05254C6F-6CD2-4E7E-92D1-EBC79426906B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagement.Desktop", "TaskManagement.Desktop\TaskManagement.Desktop.csproj", "{05254C6F-6CD2-4E7E-92D1-EBC79426906B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.DataBase", "TaskManagement.DataBase\TaskManagement.DataBase.csproj", "{EAF2F0ED-81FD-4EEC-BC43-EF70823D4770}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagement.DataBase", "TaskManagement.DataBase\TaskManagement.DataBase.csproj", "{EAF2F0ED-81FD-4EEC-BC43-EF70823D4770}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

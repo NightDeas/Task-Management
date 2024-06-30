@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Identity.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,6 +16,7 @@ namespace TaskManagement.Desktop.Services
 	{
 		public static ProjectControl ProjectControl { get; set; }
 		public static TaskControl TaskControl { get; set; }
+		public static int TaskId { get; set; }
 		public enum Controls
 		{
 			Project,

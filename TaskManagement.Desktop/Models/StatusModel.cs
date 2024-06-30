@@ -19,5 +19,14 @@ namespace TaskManagement.Desktop.Models
 			CancelByAdmin,
 			Closed,
 		}
+
+		public StatusModel ToModel(DataBase.Entities.Status status)
+		{
+			return new()
+			{
+				Id = status.Id,
+				Name = status.Name,
+			};
+		}
 	}
 }

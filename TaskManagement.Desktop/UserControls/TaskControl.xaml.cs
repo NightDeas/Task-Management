@@ -34,7 +34,19 @@ namespace TaskManagement.Desktop.UserControls
         {
             UserControls.StatusControl statusControl = new UserControls.StatusControl(Task.Status);
             statusControl.SetValue(Grid.ColumnProperty, 2);
-            ContentGrid.Children.Add(statusControl); 
+            statusControl.SetValue(Grid.RowSpanProperty, 2);
+            ContentGrid.Children.Add(statusControl);
+            DeadLineTextBlockConfig();
+         
+
+        }
+
+        private void DeadLineTextBlockConfig()
+        {
+            if (DateTime.Now.AddDays(3) >= Task.Deadline)
+                DeadlineTb.Foreground = new SolidColorBrush(Colors.DarkOrange);
+            if (DateTime.Now >= Task.Deadline)
+                DeadlineTb.Foreground = new SolidColorBrush(Colors.Red);
         }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

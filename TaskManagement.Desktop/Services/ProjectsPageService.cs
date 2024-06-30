@@ -98,13 +98,26 @@ namespace TaskManagement.Desktop.Services
 			foreach (var task in tasks)
 			{
                 TaskControl control = (new UserControls.TaskControl(TaskModel.ToModel(task)));
-                if (StylesService.TaskControl != null && StylesService.TaskControl.Task.Id == task.Id)
+                if (StylesService.TaskControl != null && StylesService.TaskControl.Task.Id == task.TaskId)
                     StylesService.SetActiveStyle(control);
                 ProjectPage.TasksStackPanel.Children.Add(control);
 			}
 		}
 
-		public async void FillTasksInPage(int EmployeeId)
+        public async void FillTasksInPage(string searchText)
+        {
+            ClearTasksInPage();
+            var tasks = await DbService.GetHistoryChangeStatusTaskAsync(ProjectId, searchText);
+            foreach (var task in tasks)
+            {
+                TaskControl control = (new UserControls.TaskControl(TaskModel.ToModel(task)));
+                if (StylesService.TaskControl != null && StylesService.TaskControl.Task.Id == task.TaskId)
+                    StylesService.SetActiveStyle(control);
+                ProjectPage.TasksStackPanel.Children.Add(control);
+            }
+        }
+
+        public async void FillTasksInPage(int EmployeeId)
 		{
 			ClearTasksInPage();
 			var historyChangeStatuses = await DbService.GetHistoryChangeStatusTaskAsync(ProjectId, EmployeeId);

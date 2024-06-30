@@ -8,28 +8,35 @@
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded" MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
     <UserControl.Resources>
         <Style x:Key="ActiveStyle" TargetType="Border">
-            <Setter Property="Background" Value="Orange"/>
+            <Setter Property="BorderBrush" Value="Orange"/>
+            <Setter Property="BorderThickness" Value="2"/>
         </Style>
         <Style x:Key="DefaultStyle" TargetType="Border">
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Border x:Name="Border" Margin="10,5" Height="60" BorderThickness="1" BorderBrush="Black" CornerRadius="25">
+        <Border x:Name="Border" Margin="10,5" Height="70" CornerRadius="25" Style="{StaticResource DefaultStyle}">
             <Grid Margin="10,5" x:Name="ContentGrid">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Margin="10,0">
-                    <TextBlock Text="{Binding Name, StringFormat=Задача: {0}}"/>
-                    <TextBlock Text="{Binding Created, StringFormat=Создана: {0:dd.MM.yyyy HH:mm}}"/>
-                    <TextBlock Text="{Binding Deadline, StringFormat=Дедлайн: {0:dd.MM.yyyy HH:mm}}"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" Margin="10,0" Grid.Row="0">
+                    <Run Text="{Binding Created, StringFormat=Задача от {0:dd.MM.yyyy}:}"></Run>
+                    <Run Text="{Binding Name}"></Run>
+                </TextBlock>
+                <StackPanel Grid.Row="1" Margin="10,0">
+                    <TextBlock FontSize="14" x:Name="DeadlineTb" Text="{Binding Deadline, StringFormat=Дедлайн: {0:dd.MM.yyyy HH:mm}}"/>
                 </StackPanel>
-                <StackPanel Grid.Column="1" >
+                <StackPanel Grid.Row="1" Grid.Column="1" >
                     <TextBlock Text="{Binding StartDate, StringFormat=Дата начала выполнения: {0:dd.MM.yyyy HH:mm}}"/>
-                    <TextBlock Text="{Binding EndDate, StringFormat=Дата окончания выполнения: {0:dd.MM.yyyy HH:mm}}"/>
                     <TextBlock Text="{Binding User.ShortName, StringFormat=Сотрудник: {0}}"/>
                 </StackPanel>
             </Grid>
