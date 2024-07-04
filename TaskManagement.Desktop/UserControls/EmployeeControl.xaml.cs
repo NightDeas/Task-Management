@@ -35,8 +35,8 @@ namespace TaskManagement.Desktop.UserControls
 
 		private async void LoadData()
 		{
-			CountCompletedTasks = await DbService.GetCountCompletedTasksByUserAsync(User.Id);
-			CountNotCompletedTasks = await DbService.GetCountNotCompletedTasksByUserAsync(User.Id);
+			//CountCompletedTasks = await DbService.GetCountCompletedTasksByUserAsync(User.Id);
+			//CountNotCompletedTasks = await DbService.GetCountNotCompletedTasksByUserAsync(User.Id);
 		}
 	}
 }

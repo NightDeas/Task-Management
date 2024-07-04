@@ -18,7 +18,7 @@ namespace TaskManagement.Desktop.Models
         public string FullName { get => $"{LastName} {FirstName} {Patronymic}"; }
         public string ShortName { get => Patronymic == null ? $"{LastName}. {FirstName.First()}" : $"{LastName}. {FirstName.First()}. {Patronymic.First()}"; }
 
-
+      
         public UserModel ToModel(DataBase.Entities.User user)
         {
             if (user == null)
