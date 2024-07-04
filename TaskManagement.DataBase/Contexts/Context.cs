@@ -34,9 +34,10 @@ namespace TaskManagement.DataBase.Contexts
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer("Data Source=DESKTOP-3VRB7GU;Initial Catalog=TaskManagement;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-			//optionsBuilder.UseSqlServer("Data Source=DESKTOP-NM4JG25\\TEST;Initial Catalog=TaskManagement;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-			optionsBuilder.EnableSensitiveDataLogging();
+			//optionsBuilder.UseSqlServer("Data Source=DESKTOP-3VRB7GU;Initial Catalog=TaskManagement;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            //optionsBuilder.UseSqlServer("Data Source=DESKTOP-NM4JG25\\TEST;Initial Catalog=TaskManagement;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            optionsBuilder.UseSqlServer("Data Source=169.254.131.3;Initial Catalog=Burnasov_TaskManagement;User ID=stud;Password=Qwerty123456$;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            optionsBuilder.EnableSensitiveDataLogging();
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

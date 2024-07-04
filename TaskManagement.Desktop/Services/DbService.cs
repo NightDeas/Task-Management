@@ -169,7 +169,7 @@ namespace TaskManagement.Desktop.Services
             Context context = new();
 
 
-			var users = await _context.Users
+			var users = await context.Users
 				.AsNoTracking()
 				.Where(x => x.RoleId == (int)role)
                 .ToListAsync();

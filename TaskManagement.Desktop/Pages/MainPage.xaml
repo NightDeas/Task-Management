@@ -15,8 +15,8 @@
         </Grid.RowDefinitions>
         <WrapPanel>
             <Button Content="Проекты" x:Name="ProjectBtn" Click="ProjectBtn_Click" Style="{StaticResource DefaultButton}"></Button>
-            <Button Content="Сотрудники" x:Name="EmployeeBtn" Click="EmployeeBtn_Click" Style="{StaticResource DefaultButton}"></Button>
-            <Button Content="Статистика" x:Name="StatisticsBtn" Click="StatisticsBtn_Click" Style="{StaticResource DefaultButton}"></Button>
+            <!--<Button Content="Сотрудники" x:Name="EmployeeBtn" Click="EmployeeBtn_Click" Style="{StaticResource DefaultButton}"></Button>-->
+            <!--<Button Content="Статистика" x:Name="StatisticsBtn" Click="StatisticsBtn_Click" Style="{StaticResource DefaultButton}"></Button>-->
         </WrapPanel>
         <Frame Margin="5" Grid.Row="1" x:Name="Frame"></Frame>
     </Grid>

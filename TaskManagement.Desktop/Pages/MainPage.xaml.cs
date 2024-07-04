@@ -31,15 +31,15 @@ namespace TaskManagement.Desktop.Pages
             Frame.Navigate(new Pages.ProjectPage());
         }
 
-        private void EmployeeBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Services.MenuPageService.SetActiveStyleButton(EmployeeBtn);
-            Frame.Navigate(new Pages.EmployeePage());
-        }
+        //private void EmployeeBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Services.MenuPageService.SetActiveStyleButton(EmployeeBtn);
+        //    Frame.Navigate(new Pages.EmployeePage());
+        //}
 
-        private void StatisticsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Services.MenuPageService.SetActiveStyleButton(StatisticsBtn);
-        }
+        //private void StatisticsBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Services.MenuPageService.SetActiveStyleButton(StatisticsBtn);
+        //}
     }
 }
